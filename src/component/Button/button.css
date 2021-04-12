@@ -1,0 +1,58 @@
+.button_global-style {
+  position: relative;
+  padding: 16px;
+  border-radius: 16px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  transition: 0.3s;
+}
+.button_small {
+  width: 64px;
+  height: 56px;
+  color: #4bcfa0;
+  background: #fff;
+  text-transform: uppercase;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.button_small:hover {
+  border: none;
+  color: #fff;
+  background: #4bcfa0;
+}
+
+.button_middle {
+  width: 235px;
+  height: 60px;
+  font-size: 24px;
+  line-height: 28px;
+  background: #50daa8;
+}
+.button_big {
+  width: 288px;
+  height: 56px;
+  background: #4bcfa0;
+  text-transform: uppercase;
+}
+.button__decor {
+  position: absolute;
+  top: 19px;
+  right: 30px;
+  opacity: 0;
+}
+.button__decor:hover {
+  background: #50daa8;
+}
+
+.button_big:hover .button__decor {
+  right: 70px;
+  opacity: 10;
+}
+.card__price {
+  font-size: 60px;
+  line-height: 72px;
+  letter-spacing: -0.02em;
+}
+
