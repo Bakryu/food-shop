@@ -3,7 +3,13 @@ import Button from "../Button";
 import priceDecor from "../../images/priceDecor.svg";
 import "./card.css";
 
-export default function Card({ category, productName, price }) {
+export default function Card({
+  category,
+  productName,
+  price,
+  setIsOpenModal,
+  setSelectCard,
+}) {
   return (
     <div className="card_style">
       <span className="card__category">{category}</span>
@@ -18,7 +24,14 @@ export default function Card({ category, productName, price }) {
           <span className="card__price">{price}</span>
         </div>
 
-        <Button buttonStyle={"button_small"} buttonValue={"Buy"} />
+        <Button
+          buttonStyle={"button_small"}
+          buttonValue={"Buy"}
+          handleChange={() => {
+            setSelectCard({ category, productName, price });
+            setIsOpenModal(true);
+          }}
+        />
       </div>
     </div>
   );

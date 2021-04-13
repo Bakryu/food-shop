@@ -42,6 +42,7 @@
   top: 19px;
   right: 30px;
   opacity: 0;
+  transition: 0.3s;
 }
 .button__decor:hover {
   background: #50daa8;

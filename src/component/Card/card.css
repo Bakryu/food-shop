@@ -25,7 +25,6 @@
 }
 .card__name {
   font-size: 40px;
-  line-height: 48px;
   margin: 8px 0 40px;
 }
 .card__price-section {
@@ -33,7 +32,7 @@
   justify-content: space-between;
 }
 .card__price-currency {
-  padding-bottom: 5px;
+  padding-bottom: 12px;
 }
 
 @media screen and (max-width: 960px) {
