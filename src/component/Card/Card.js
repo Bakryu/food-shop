@@ -1,14 +1,13 @@
 import React from "react";
 import Button from "../Button";
-import arrowRight from "../../images/arrowRight.svg";
 import priceDecor from "../../images/priceDecor.svg";
 import "./card.css";
 
-export default function Card() {
+export default function Card({ category, productName, price }) {
   return (
     <div className="card_style">
-      <span className="card__category">Drinks</span>
-      <span className="card__name">Orange Juice</span>
+      <span className="card__category">{category}</span>
+      <span className="card__name">{productName}</span>
       <div className="card__price-section">
         <div>
           <img
@@ -16,14 +15,10 @@ export default function Card() {
             src={priceDecor}
             alt="currency"
           />
-          <span className="card__price">14.99</span>
+          <span className="card__price">{price}</span>
         </div>
 
-        <Button
-          buttonStyle={"button_small"}
-          buttonValue={"Order"}
-          buttonDecorPath={arrowRight}
-        />
+        <Button buttonStyle={"button_small"} buttonValue={"Buy"} />
       </div>
     </div>
   );
