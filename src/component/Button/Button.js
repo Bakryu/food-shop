@@ -6,9 +6,11 @@ export default function Button({
   buttonValue,
   buttonDecorPath,
   handleChange,
+  buttonType
 }) {
   return (
     <button
+      type={buttonType}
       className={`button_global-style ${buttonStyle}`}
       onClick={handleChange}
     >

@@ -20,18 +20,18 @@
 }
 .sopping-card__input-grope {
   position: relative;
-  padding-top: 25px;
+  padding-top: 30px;
   margin-bottom: 5px;
   list-style-type: none;
 }
 .input-grope_error {
   position: absolute;
-  top: 0;
+  top: 13px;
   left: 0;
 }
 .input-grope__error-image {
   position: absolute;
-  top: 40px;
+  top: 47px;
   right: 14px;
   z-index: 1;
 }
@@ -48,4 +48,21 @@
   position: absolute;
   top: -10px;
   right: -10px;
+}
+input:focus {
+  outline: none;
+}
+.sopping-card__input_red {
+  border-color: #e43f3f;
+}
+.sopping-card__input_green {
+  border-color: #50daa8;
+}
+
+.shopping-card_error-massage {
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  font-size: 12px;
+  color: #e43f3f;
 }

@@ -10,6 +10,10 @@ export default function Modal({
   cardData,
   setUserData,
   userData,
+  formInValid,
+  handleReviewName,
+  handleReviewNumber,
+  handleSubmit
 }) {
   if (isOpenModal) {
     return createPortal(
@@ -25,6 +29,10 @@ export default function Modal({
           setIsOpenModal={setIsOpenModal}
           setUserData={setUserData}
           userData={userData}
+          formInValid={formInValid}
+          handleReviewName={handleReviewName}
+          handleReviewNumber={handleReviewNumber}
+          handleSubmit={handleSubmit}
         />
       </div>,
       document.getElementById("modal-root")
