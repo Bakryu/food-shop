@@ -104,6 +104,12 @@ function App() {
         name: target.value.split(" ").join(""),
       };
     });
+    setFormValid((prevState) => {
+      return {
+        ...prevState,
+        nameError: null,
+      };
+    });
   };
 
   const setUserNumber = (target) => {
@@ -111,6 +117,12 @@ function App() {
       return {
         ...prevState,
         number: target.value.split(" ").join(""),
+      };
+    });
+    setFormValid((prevState) => {
+      return {
+        ...prevState,
+        numberError: null,
       };
     });
   };
