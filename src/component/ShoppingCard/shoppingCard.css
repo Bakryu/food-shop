@@ -1,6 +1,6 @@
 .shopping-card {
   position: relative;
-  width: 384px;
+  max-width: 384px;
   margin: 180px auto 0;
   background: #ffffff;
   border-radius: 24px;
@@ -65,4 +65,14 @@ input:focus {
   left: 0;
   font-size: 12px;
   color: #e43f3f;
+}
+
+@media screen and (max-width: 500px) {
+  .shopping-card {
+    padding: 20px;
+    max-width: 280px;
+  }
+  .shopping-card__form {
+    max-width: 250px;
+  }
 }

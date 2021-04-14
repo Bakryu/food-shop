@@ -39,7 +39,7 @@ function isNumbers(value) {
   }
 }
 function isRequiredLength(value) {
-  if (value.length <= 12) {
+  if (value.length !== 12) {
     return "Should contain 12 characters";
   }
 }

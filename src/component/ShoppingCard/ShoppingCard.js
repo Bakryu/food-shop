@@ -34,6 +34,7 @@ export default function ShoppingCard({
         <span className="card__price">{price}</span>
       </div>
       <form
+        className="shopping-card__form"
         onSubmit={(event) => {
           event.preventDefault();
           handleSubmit();
@@ -42,26 +43,20 @@ export default function ShoppingCard({
         <ul className="shopping-card__input-list">
           <li className="sopping-card__input-grope">
             {nameError && (
-              <>
-                <label className="input-grope_error" htmlFor="name">
-                  Error
-                </label>
-
-                <img
-                  className="input-grope__error-image"
-                  src={errorButton}
-                  alt="error"
-                />
-              </>
+              <img
+                className="input-grope__error-image"
+                src={errorButton}
+                alt="error"
+              />
             )}
             <input
               className={`sopping-card__input ${
                 nameError && `sopping-card__input_red`
               } ${nameError === "" && `sopping-card__input_green`}`}
               type="text"
-              name="name"
               placeholder="name"
               onBlur={handleReviewName}
+              value={userData.name}
               onChange={({ target }) => {
                 setUserData((prevState) => {
                   return {
@@ -70,30 +65,22 @@ export default function ShoppingCard({
                   };
                 });
               }}
-              value={userData.name}
             />
             <span className="shopping-card_error-massage">{nameError}</span>
           </li>
           <li className="sopping-card__input-grope">
             {numberError && (
-              <>
-                <label className="input-grope_error" htmlFor="number">
-                  Error
-                </label>
-
-                <img
-                  className="input-grope__error-image"
-                  src={errorButton}
-                  alt="error"
-                />
-              </>
+              <img
+                className="input-grope__error-image"
+                src={errorButton}
+                alt="error"
+              />
             )}
             <input
               className={`sopping-card__input ${
                 numberError && `sopping-card__input_red`
               } ${numberError === "" && `sopping-card__input_green`}`}
               type="text"
-              name="number"
               placeholder="number"
               onBlur={handleReviewNumber}
               onChange={({ target }) => {

@@ -3,12 +3,23 @@ import getData from "../../services/dataService";
 import Card from "../Card";
 import Modal from "../Modal";
 import Button from "../Button";
+import ShoppingCard from "../ShoppingCard";
 import { textDecorName } from "../../helpers/textDecor";
 import {
   arrayHandleReviewName,
   arrayHandleReviewNumber,
-} from "../../helpers/handleReview";
+} from "../../helpers/checkValidation";
+import priceDecor from "../../images/priceDecor.svg";
 import "./app.css";
+
+const defaultFormInValid = {
+  nameError: null,
+  numberError: null,
+};
+const defaultUserData = {
+  name: "",
+  number: "",
+};
 
 function App() {
   const [data, setData] = useState([]);
@@ -19,30 +30,29 @@ function App() {
     productName: "Orange Juice",
     price: 22,
   });
-  const [userData, setUserData] = useState({
-    name: "",
-    number: "",
-  });
+  const [userData, setUserData] = useState(defaultUserData);
 
-  const [formInValid, setFormValid] = useState({
-    nameError: null,
-    numberError: null,
-  });
+  const [formInValid, setFormValid] = useState(defaultFormInValid);
+  const { name, number } = userData;
   useEffect(() => {
     getData().then((data) => setData(data));
   }, []);
 
-  const { name, number } = userData;
   const handleCardClick = (card) => {
     setSelectCard(card);
     setIsOpenModal(true);
+  };
+
+  const resetState = () => {
+    setIsOpenModal(false);
+    setUserData(defaultUserData);
+    setFormValid(defaultFormInValid);
   };
   const handleSubmit = () => {
     let hasError = false;
     handleReviewName();
     handleReviewNumber();
     for (const field in formInValid) {
-      // console.log(field);
       if (formInValid[field]) {
         hasError = true;
       }
@@ -50,6 +60,7 @@ function App() {
     if (!hasError) {
       console.log(name, number);
     }
+    resetState();
   };
   const handleReviewName = () => {
     let error = "";
@@ -116,7 +127,19 @@ function App() {
         handleReviewName={handleReviewName}
         handleReviewNumber={handleReviewNumber}
         handleSubmit={handleSubmit}
-      />
+      >
+        <ShoppingCard
+          cardData={selectCard}
+          setIsOpenModal={setIsOpenModal}
+          priceDecor={priceDecor}
+          setUserData={setUserData}
+          userData={userData}
+          formInValid={formInValid}
+          handleReviewName={handleReviewName}
+          handleReviewNumber={handleReviewNumber}
+          handleSubmit={handleSubmit}
+        />
+      </Modal>
     </div>
   );
 }
