@@ -1,3 +1,7 @@
+button:hover,
+:focus {
+  outline: none;
+}
 .button_global-style {
   position: relative;
   padding: 16px;
@@ -30,6 +34,10 @@
   font-size: 24px;
   line-height: 28px;
   background: #50daa8;
+}
+.button_middle:hover {
+  box-shadow: 10px 10px 43px 2px rgba(80, 218, 168, 0.4);
+  transform: scale(1.05);
 }
 .button_big {
   width: 288px;

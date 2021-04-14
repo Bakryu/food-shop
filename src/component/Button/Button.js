@@ -15,7 +15,7 @@ export default function Button({
       onClick={handleChange}
     >
       {buttonValue}
-      <img className="button__decor" src={buttonDecorPath} />
+      <img className="button__decor" src={buttonDecorPath} alt=""/>
     </button>
   );
 }
