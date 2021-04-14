@@ -164,26 +164,11 @@ function App() {
         handleChange={chooseCheapProduct}
       />
 
-      <Modal
-        isOpenModal={isOpenModal}
-        setIsOpenModal={resetState}
-        setUserData={setUserData}
-        userData={userData}
-        cardData={selectCard}
-        formInValid={formInValid}
-        handleReviewName={handleReviewName}
-        handleReviewNumber={handleReviewNumber}
-        handleSubmit={handleSubmit}
-      >
+      <Modal isOpenModal={isOpenModal} setIsOpenModal={resetState}>
         <ShoppingCard
           cardData={selectCard}
           setIsOpenModal={resetState}
           priceDecor={priceDecor}
-          setUserData={setUserData}
-          userData={userData}
-          formInValid={formInValid}
-          handleReviewName={handleReviewName}
-          handleReviewNumber={handleReviewNumber}
           handleSubmit={handleSubmit}
         >
           <Input
