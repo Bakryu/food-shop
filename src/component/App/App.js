@@ -7,17 +7,14 @@ import ShoppingCard from "../ShoppingCard";
 import Input from "../Input";
 import Spinner from "../Spinner";
 import { textDecorName } from "../../helpers/textDecor";
-import {
-  arrayHandleReviewName,
-  arrayHandleReviewNumber,
-} from "../../helpers/checkValidation";
+import { formValidators } from "../../helpers/checkValidation";
 import priceDecor from "../../images/priceDecor.svg";
 import errorImage from "../../images/errorImage.svg";
 import "./app.css";
 
 const defaultFormInValid = {
-  nameError: null,
-  numberError: null,
+  name: null,
+  number: null,
 };
 const defaultUserData = {
   name: "",
@@ -56,100 +53,66 @@ function App() {
     setFormValid(defaultFormInValid);
   };
 
-  const handleSubmit = () => {
-    let hasError = false;
-    handleReviewName();
-    handleReviewNumber();
-    for (const field in formInValid) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errors = {};
+    for (const field in userData) {
       if (formInValid[field]) {
-        hasError = true;
+        errors[field] = formInValid[field];
+      }
+      if (userData[field] === "") {
+        errors[field] = "This field in required";
       }
     }
-    if (!hasError) {
-      if (formInValid.nameError !== null) {
-        console.log(name, number);
-        resetState();
+    if (!Object.keys(errors).length) {
+      console.log(userData);
+      resetState();
+      return;
+    } else {
+      setFormValid((prevState) => ({ ...prevState, ...errors }));
+    }
+  };
+
+  const handleSetError = ({ target: { name, value } }) => {
+    const checkFuncs = formValidators[name];
+    for (let i = 0; i < checkFuncs.length; i++) {
+      const checkResult = checkFuncs[i](value);
+      if (checkResult) {
+        setFormValid((prevState) => {
+          return {
+            ...prevState,
+            [name]: checkResult,
+          };
+        });
+        break;
       }
     }
   };
 
-  const handleReviewName = () => {
-    let error = "";
-    arrayHandleReviewName.forEach((func) => {
-      if (func(name)) {
-        error = func(name);
-      }
-    });
-    setFormValid((prevState) => {
-      return { ...prevState, nameError: error };
-    });
-  };
-
-  const handleReviewNumber = () => {
-    let error = "";
-    arrayHandleReviewNumber.forEach((func) => {
-      if (func(number)) {
-        error = func(number);
-      }
-    });
-    setFormValid((prevState) => {
-      return { ...prevState, numberError: error };
-    });
-  };
-
-  const setUserName = (target) => {
+  const handleChange = ({ target: { value, name } }) => {
     setUserData((prevState) => {
       return {
         ...prevState,
-        name: target.value.split(" ").join(""),
+        [name]: value,
       };
     });
     setFormValid((prevState) => {
       return {
         ...prevState,
-        nameError: null,
-      };
-    });
-  };
-
-  const setUserNumber = (target) => {
-    setUserData((prevState) => {
-      return {
-        ...prevState,
-        number: target.value.split(" ").join(""),
-      };
-    });
-    setFormValid((prevState) => {
-      return {
-        ...prevState,
-        numberError: null,
+        [name]: null,
       };
     });
   };
 
   const chooseCheapProduct = () => {
-    let cheapProduct = {};
-    let cheapPrice = 0;
-    data.forEach(({ category, name, price }) => {
-      if (price >= cheapPrice) {
-        cheapProduct = { category, productName: name, price };
+    const cheapProduct = data.reduce((cheapProduct, product) => {
+      if (product.price >= cheapProduct.price) {
+        return product;
       }
-    });
-    setSelectCard(cheapProduct);
-    setIsOpenModal(true);
+      return cheapProduct;
+    }, data[0]);
+    handleCardClick(cheapProduct);
   };
-
-  const productList = data.map(({ category, name, price }) => {
-    return (
-      <Card
-        key={name}
-        category={category}
-        productName={textDecorName(name)}
-        price={price}
-        onClick={handleCardClick}
-      />
-    );
-  });
 
   if (!isDataLoaded) {
     return <Spinner />;
@@ -157,7 +120,19 @@ function App() {
 
   return (
     <div className="content-wrapper">
-      <div className="card-list"> {productList}</div>
+      <div className="card-list">
+        {data.map(({ category, name, price }) => {
+          return (
+            <Card
+              key={name}
+              category={category}
+              productName={textDecorName(name)}
+              price={price}
+              onClick={handleCardClick}
+            />
+          );
+        })}
+      </div>
       <Button
         buttonStyle="button_middle"
         buttonValue="Buy cheapest"
@@ -172,20 +147,22 @@ function App() {
           handleSubmit={handleSubmit}
         >
           <Input
-            error={formInValid.nameError}
+            error={formInValid.name}
             errorImage={errorImage}
-            handleReview={handleReviewName}
+            onBlur={handleSetError}
             inputValue={name}
-            setData={setUserName}
+            onChange={handleChange}
             placeholder="name"
+            name="name"
           />
           <Input
-            error={formInValid.numberError}
+            error={formInValid.number}
             errorImage={errorImage}
-            handleReview={handleReviewNumber}
+            onBlur={handleSetError}
             inputValue={number}
-            setData={setUserNumber}
+            onChange={handleChange}
             placeholder="number"
+            name="number"
           />
         </ShoppingCard>
       </Modal>

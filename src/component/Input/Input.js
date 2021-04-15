@@ -1,28 +1,39 @@
 import React from "react";
 import "./input.css";
 
+const getInputClassName = (errorText) => {
+  if (errorText) {
+    return "input_red";
+  }
+  if (errorText === "") {
+    return "input_green";
+  }
+};
+
 export default function Input({
   error,
   errorImage,
-  handleReview,
+  onBlur,
   inputValue,
-  setData,
+  onChange,
   placeholder,
+  name,
 }) {
+  const inputStyle = `input  ${getInputClassName(error, inputValue)}`;
+
   return (
     <li className="input__grope">
       {error && (
         <img className="input__error-image" src={errorImage} alt="error" />
       )}
       <input
-        className={`input ${error && `input_red`} ${
-          error === "" && `input_green`
-        }`}
+        className={inputStyle}
         type="text"
         placeholder={placeholder}
-        onBlur={handleReview}
+        onBlur={onBlur}
         value={inputValue}
-        onChange={({ target }) => setData(target)}
+        onChange={onChange}
+        name={name}
       />
       <span className="input__error-massage">{error}</span>
     </li>

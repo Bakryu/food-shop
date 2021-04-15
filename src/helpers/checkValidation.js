@@ -1,5 +1,7 @@
-const arrayHandleReviewName = [isLetters, isEmpty];
-const arrayHandleReviewNumber = [isRequiredLength, isNumbers, isEmpty];
+export const formValidators = {
+  name: [isEmpty, isLetters],
+  number: [isEmpty, isNumbers, isRequiredLength],
+};
 
 function isEmpty(value) {
   if (!value) {
@@ -43,5 +45,3 @@ function isRequiredLength(value) {
     return "Should contain 12 characters";
   }
 }
-
-export { arrayHandleReviewName, arrayHandleReviewNumber };

@@ -23,13 +23,7 @@ export default function ShoppingCard(props) {
         <img className="card__price-currency" src={priceDecor} alt="currency" />
         <span className="card__price">{price}</span>
       </div>
-      <form
-        className="shopping-card__form"
-        onSubmit={(event) => {
-          event.preventDefault();
-          handleSubmit();
-        }}
-      >
+      <form className="shopping-card__form" onSubmit={handleSubmit}>
         <ul className="shopping-card__input-list">{props.children}</ul>
 
         <Button
