@@ -85,6 +85,13 @@ function App() {
           };
         });
         break;
+      } else {
+        setFormValid((prevState) => {
+          return {
+            ...prevState,
+            [name]: "",
+          };
+        });
       }
     }
   };
@@ -106,7 +113,7 @@ function App() {
 
   const chooseCheapProduct = () => {
     const cheapProduct = data.reduce((cheapProduct, product) => {
-      if (product.price >= cheapProduct.price) {
+      if (product.price <= cheapProduct.price) {
         return product;
       }
       return cheapProduct;
