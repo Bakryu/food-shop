@@ -6,7 +6,6 @@ import Button from "../Button";
 import ShoppingCard from "../ShoppingCard";
 import Input from "../Input";
 import Spinner from "../Spinner";
-import { textDecorName } from "../../helpers/textDecor";
 import { formValidators } from "../../helpers/checkValidation";
 import priceDecor from "../../images/priceDecor.svg";
 import errorImage from "../../images/errorImage.svg";
@@ -126,7 +125,7 @@ function App() {
             <Card
               key={name}
               category={category}
-              productName={textDecorName(name)}
+              productName={name}
               price={price}
               onClick={handleCardClick}
             />

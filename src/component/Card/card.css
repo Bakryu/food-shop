@@ -26,6 +26,7 @@
 .card__name {
   font-size: 40px;
   margin: 8px 0 40px;
+  text-transform: capitalize;
 }
 .card__price-section {
   display: flex;
