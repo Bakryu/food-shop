@@ -6,7 +6,6 @@ const getInputClassName = (errorText, inputValue) => {
     return "input_red";
   }
   if (inputValue && !errorText) {
-    console.log(inputValue && !errorText);
     return "input_green";
   }
 };

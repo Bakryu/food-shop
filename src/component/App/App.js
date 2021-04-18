@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import getData from "../../services/dataService";
+import React, { useState } from "react";
+import useGetData from "../../hooks/useGetData";
 import Card from "../Card";
 import Modal from "../Modal";
 import Button from "../Button";
@@ -11,18 +11,13 @@ import priceDecor from "../../images/priceDecor.svg";
 import errorImage from "../../images/errorImage.svg";
 import "./app.css";
 
-const defaultFormInValid = {
-  name: null,
-  number: null,
-};
+
 const defaultUserData = {
   name: "",
   number: "",
 };
 
 function App() {
-  const [data, setData] = useState([]);
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [selectCard, setSelectCard] = useState({
     category: "Fruits",
@@ -30,15 +25,8 @@ function App() {
     price: 22,
   });
   const [userData, setUserData] = useState(defaultUserData);
-  const [formInValid, setFormValid] = useState(defaultFormInValid);
-
-  useEffect(() => {
-    getData().then((data) => {
-      setData(data);
-      setIsDataLoaded(true);
-    });
-  }, []);
-
+  const [formInValid, setFormValid] = useState(defaultUserData);
+  const { data, isDataLoaded } = useGetData();
   const { name, number } = userData;
 
   const handleCardClick = (card) => {
@@ -49,7 +37,7 @@ function App() {
   const resetState = () => {
     setIsOpenModal(false);
     setUserData(defaultUserData);
-    setFormValid(defaultFormInValid);
+    setFormValid(defaultUserData);
   };
 
   const handleSubmit = (e) => {
@@ -118,7 +106,9 @@ function App() {
   }
 
   return (
-    <div className="content-wrapper">
+    <div
+      className={`content-wrapper ${isOpenModal && "content-wrapper_hidden"}`}
+    >
       <div className="card-list">
         {data.map(({ category, name, price }) => {
           return (

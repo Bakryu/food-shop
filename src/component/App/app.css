@@ -6,6 +6,10 @@
   justify-content: center;
   align-items: center;
 }
+.content-wrapper_hidden {
+  height: 100vh;
+  overflow: hidden;
+}
 .card-list {
   margin: 0 auto 50px;
   display: flex;
