@@ -85,13 +85,6 @@ function App() {
           };
         });
         break;
-      } else {
-        setFormValid((prevState) => {
-          return {
-            ...prevState,
-            [name]: "",
-          };
-        });
       }
     }
   };

@@ -1,11 +1,12 @@
 import React from "react";
 import "./input.css";
 
-const getInputClassName = (errorText) => {
+const getInputClassName = (errorText, inputValue) => {
   if (errorText) {
     return "input_red";
   }
-  if (errorText === "") {
+  if (inputValue && !errorText) {
+    console.log(inputValue && !errorText);
     return "input_green";
   }
 };

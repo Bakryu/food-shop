@@ -22,7 +22,7 @@
 .input_red {
   border-color: #e43f3f;
 }
-.input_green {
+.input_green:not(:focus) {
   border-color: #50daa8;
 }
 .input__error-massage {

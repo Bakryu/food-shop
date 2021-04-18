@@ -7,7 +7,3 @@ const getData = async () => {
 };
 
 export default getData;
-
-// if (!response.ok) {
-//   throw new Error(`Could not fetch ${BASE_URL},received ${res.status}`);
-// }
